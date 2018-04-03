@@ -1,7 +1,7 @@
 # coding: utf-8
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import cv2
 import argparse
 import numpy as np
@@ -79,7 +79,7 @@ def load_data_from_annotation():
         label    = train_data[idx][1]
         img_path = os.path.join(os.getcwd(), 'data', args.train_data, img_path)
         img = imread(img_path, mode='RGB')
-        if img.nbytes > 10**5: # Read image file only when its size is larger than 100 kilo bytes
+        if img.nbytes > 10**3: # Read image file only when its size is larger than 1 kilo bytes
             img = imresize(img, (img_col, img_row, 3))
             imgs.append(img)
             labels.append(label)
@@ -164,7 +164,7 @@ def load_data_from_categorical_folders():
         img_path = img_files[idx]
         label    = labels[idx]
         img = imread(img_path, mode='RGB')
-        if img.nbytes > 10**5: # Read image file only when its size is larger than 100 kilo bytes
+        if img.nbytes > 10**3: # Read image file only when its size is larger than 1 kilo bytes
             img = imresize(img, (img_col, img_row, 3))
             imgs.append(img)
             new_labels.append(label)
