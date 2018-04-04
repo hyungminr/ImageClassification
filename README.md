@@ -8,17 +8,17 @@ https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50
 ## Training on Custom Data
 
 ### 1. Data Structure
-When training on your custom data, you should construct your data format - you might want to choose one of two options.
+When training on your custom data, your data structure should follow one of these two formats.
 
 #### (1) with annotation file (*see data/example_annotation*)
 
 ```
-[data]
-... [Your_Custom_Data]
-...... annotation.txt
-...... [Images]
-......... a.jpg
-......... b.jpg
+data/
+└── Your_Custom_Data/
+    ├── annotation.txt
+    └── Images/
+        ├── a.jpg
+        └── b.jpg
 ```
 
 where *annotation.txt*'s format should follow:<br />
@@ -31,14 +31,14 @@ Images/b.jpg (tab) label_b
 #### (2) with no annotation file (*see data/example_categorical_folders*)
 
 ```
-[data]
-... [Your_Custom_Data]
-...... [label_a]
-......... a1.jpg
-......... a2.jpg
-...... [label_b]
-......... b1.jpg
-......... b2.jpg
+data/
+└── Your_Custom_Data/
+    ├── Label_a/
+    │   ├── a1.jpg
+    │   └── a2.jpg
+    └── Label_b/
+        ├── b1.jpg
+        └── b2.jpg
 ```
 
 ### 2. The Number of Classes
