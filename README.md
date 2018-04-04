@@ -9,13 +9,15 @@ When training on your custom data, you should construct your data format - you m
 
 (1) with annotation file (see data/example_annotation)
 
+'''
 [data]<br />
 -|-[Your_Custom_Data]<br />
--|--|-annotation.txt<br />
--|--|-[Images]<br />
--|--|--|-a.jpg<br />
--|--|--|-b.jpg<br />
-  
+-|-|-annotation.txt<br />
+-|-|-[Images]<br />
+-|-|-|-a.jpg<br />
+-|-|-|-b.jpg<br />
+'''
+
 where annotation.txt's format should follow:
 Images/a.jpg  (tab) label_a
 Images/b.jpg  (tab) label_b
