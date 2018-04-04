@@ -13,12 +13,12 @@ When training on your custom data, you should construct your data format - you m
 #### (1) with annotation file (*see data/example_annotation*)
 
 ```
-[data]
-... [Your_Custom_Data]
-...... annotation.txt
-...... [Images]
-......... a.jpg
-......... b.jpg
+data/
+├── Your_Custom_Data/
+├── ├── annotation.txt
+├── ├── Images/
+├── ├── ├── a.jpg
+└── └── └── b.jpg
 ```
 
 where *annotation.txt*'s format should follow:<br />
