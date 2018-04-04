@@ -26,17 +26,17 @@ def parse_args():
                         help='Use CPU mode (overrides --gpu)',
                         action='store_true')
     parser.add_argument('--model', dest='model', help='Network to use [resnet50]',
-                        default='resnet50')
+                        default='resnet50_imagenet')
     parser.add_argument('--pretrained', dest='pretrained', help='Pretrained Custom Network to use',
                         default='pretrainedModel.h5')
     parser.add_argument('--epochs', dest='epochs', help='Number of Epochs for Training',
-                        default=500, type=int)
+                        default=10, type=int)
     parser.add_argument('--save', dest='save', help='Save Model File Name',
-                        default='result.h5')
+                        default='resnet50.imagenet.h5')
     parser.add_argument('--test', dest='test_model', help='Test Model',
-                        default=False, type=bool)
+                        default=True, type=bool)
     parser.add_argument('--train', dest='train_data', help='Training Data Dir',
-                        default='CustomData')
+                        default='example_annotation')
     parser.add_argument('--size', dest='img_size', help='Size of Input Images (default:224 -> 224x224x3)',
                         default=224, type=int)
 
@@ -67,14 +67,13 @@ def load_data_from_annotation():
     imgs = []
     labels = []
     
-    
     idxs = range(num_data)
     np.random.seed(0)
     np.random.shuffle(idxs)
     idx_count = 0
     for idx in tqdm(idxs):
         img_path = train_data[idx][0]
-        label    = train_data[idx][1]
+        label    = train_data[idx][1][:-1] # remove \r
         img_path = os.path.join(os.getcwd(), 'data', args.train_data, img_path)
         img = imread(img_path, mode='RGB')
         if img.nbytes > 10**3: # Read image file only when its size is larger than 1 kilo bytes
@@ -274,7 +273,6 @@ def test_model(label_dict, sample_num=4):
         if predicted_label == target_label:
             right += 1
         plt.title('Groundtruth : {}\nPredicted   : {}'.format(target_label, predicted_label))
-        # plt.title('{:12}: {}\n{:12}: {}'.format('Groundtruth', target_label, 'Predicted', predicted_label))
         _ = plt.imshow(img)
         idx_count += 1
         if idx_count >= sample_num:
