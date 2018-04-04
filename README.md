@@ -38,10 +38,10 @@ Images/b.jpg  (tab) label_b
 ......... b1.jpg
 ......... b2.jpg
 ```
-
+<br />
 2. Class Number<br /><br />
 If your class number is different from that of ImageNet (i.e., your_class_num is not 1,000), the last Dense layer will automatically be replaced.
-
-3. Classification / Regression Mode<br />
+<br />
+3. Classification / Regression Mode<br /><br />
 By default, the code will train a classification model.<br />
 You can train a regression model by adding "--mode regression" in run_train.sh
