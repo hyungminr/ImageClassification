@@ -33,10 +33,10 @@ Images/b.jpg (tab) label_b
 ```
 data/
 └── Your_Custom_Data/
-    ├── label_a/
+    ├── Label_a/
     │   ├── a1.jpg
     │   └── a2.jpg
-    └── label_b/
+    └── Label_b/
         ├── b1.jpg
         └── b2.jpg
 ```
