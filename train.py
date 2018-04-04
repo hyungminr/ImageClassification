@@ -12,8 +12,6 @@ from tqdm import tqdm
 from PIL import Image
 from datetime import datetime
 from scipy.misc import imread, imsave, imresize
-# from keras.layers import Input, Dense, BatchNormalization, LSTM
-# from keras.layers import Conv2D, Flatten, Reshape, Add, MaxPooling2D, Dropout
 from keras.optimizers import RMSprop
 from keras.models import Model, load_model
 from keras.utils import to_categorical
@@ -79,7 +77,7 @@ def load_data_from_annotation():
         label    = train_data[idx][1]
         img_path = os.path.join(os.getcwd(), 'data', args.train_data, img_path)
         img = imread(img_path, mode='RGB')
-        if img.nbytes > 10**5: # Read image file only when its size is larger than 100 kilo bytes
+        if img.nbytes > 10**3: # Read image file only when its size is larger than 1 kilo bytes
             img = imresize(img, (img_col, img_row, 3))
             imgs.append(img)
             labels.append(label)
@@ -91,10 +89,6 @@ def load_data_from_annotation():
     
     return pd.DataFrame(data)
     
-#     frame = pd.DataFrame(data)
-    
-#     return frame#.sample(frac=1).reset_index(drop=True) # 랜덤 셔플링
-
 def load_data_from_categorical_folders():
 
     args = parse_args()
@@ -105,8 +99,6 @@ def load_data_from_categorical_folders():
     labels = []
     
     data_path = os.path.join(os.getcwd(), 'data', args.train_data)
-    label = 0
-    label_dict = {}
     category_idx = 0
 
     print 'Loading files from data folder'
@@ -148,23 +140,18 @@ def load_data_from_categorical_folders():
                     img_count += 1
                     img_files.append(os.path.join(img_path, img_file))
                     labels.append(category)
-            if img_count > 0:
-                label_dict[category_idx] = category
-                category_idx += 1
-
     imgs = []
     new_labels = []
     num_data = len(img_files)
     idxs = range(num_data)
     np.random.seed(0)
     np.random.shuffle(idxs)
-    idx_count = 0
     print 'Image reading from files'
     for idx in tqdm(idxs):
         img_path = img_files[idx]
         label    = labels[idx]
         img = imread(img_path, mode='RGB')
-        if img.nbytes > 10**5: # Read image file only when its size is larger than 100 kilo bytes
+        if img.nbytes > 10**3: # Read image file only when its size is larger than 1 kilo bytes
             img = imresize(img, (img_col, img_row, 3))
             imgs.append(img)
             new_labels.append(label)
@@ -173,19 +160,8 @@ def load_data_from_categorical_folders():
 
     data = {'Image': imgs,
             'Label': new_labels}
-    frame = pd.DataFrame(data)
+    return pd.DataFrame(data)
 
-    return frame.sample(frac=1).reset_index(drop=True) # Random Shuffle
-
-
-def show_dataSamples(frame, sample_num=3):
-    for idx in xrange(sample_num):
-        rand_idx = np.random.randint(len(frame['Label']))
-        plt.axis('off')
-        plt.title(frame['Label'][rand_idx])
-        _ = plt.imshow(frame['Image'][rand_idx])
-        plt.show()
-    return
 
 def label_to_categorical(labels, label_dict=None, mode='to_categorical'):
     if mode == 'to_categorical':
@@ -195,6 +171,7 @@ def label_to_categorical(labels, label_dict=None, mode='to_categorical'):
         output = label_dict[labels.argmax(1)]
         output = output[0]
     return output, label_dict
+
 
 def construct_data(frame):
     args    = parse_args()
@@ -233,6 +210,7 @@ def get_model(input_shape, class_num):
     
     return model
 
+
 def train_model(model, batch_size=10):
     args = parse_args()
     epochs = args.epochs
@@ -265,7 +243,7 @@ def train_model(model, batch_size=10):
     print '** Model Saved at [{}] ...'.format(modelName)
 
     
-def test_model(label_dict, sample_num=30):
+def test_model(label_dict, sample_num=4):
     print '**** Start testing the model'
     args = parse_args()
     img_col = args.img_size
@@ -275,16 +253,16 @@ def test_model(label_dict, sample_num=30):
     model = load_model(modelName)
     
     right = 0
-    f1 = plt.figure(figsize=(20,60))
+    f1 = plt.figure(figsize=(20,20))
     
     num_data = len(frame['Label'])
     
     idxs = range(int(num_data*0.8), num_data)
     np.random.seed(0)
     np.random.shuffle(idxs)
-    idx_count = 1
+    idx_count = 0
     for idx in tqdm(idxs):
-        plt.subplot(10,3,idx_count)
+        plt.subplot(int(np.ceil(sample_num/2.)),2,idx_count+1)
         plt.axis('off')
         img = frame['Image'][idx]
         input_img = np.reshape(img, (1, img_col, img_row, 3))
@@ -295,18 +273,19 @@ def test_model(label_dict, sample_num=30):
         predicted_label = predicted_label[0]
         if predicted_label == target_label:
             right += 1
-        # plt.title('Groundtruth : {}\nPredicted   : {}'.format(target_label, predicted_label))
-        plt.title('{:12}: {}\n{:12}: {}'.format('Groundtruth', target_label, 'Predicted', predicted_label))
+        plt.title('Groundtruth : {}\nPredicted   : {}'.format(target_label, predicted_label))
+        # plt.title('{:12}: {}\n{:12}: {}'.format('Groundtruth', target_label, 'Predicted', predicted_label))
         _ = plt.imshow(img)
         idx_count += 1
         if idx_count >= sample_num:
             break
 
-    print '** Accuracy : {} ({} / {})'.format(right*100./sample_num, right, sample_num)
-    # plt.show()
+    print '** Accuracy : {} ({} / {})'.format(right*100./sample_num, right, idx_count)
     now = datetime.now()
     nowDatetime = now.strftime('%Y_%m_%d-%H%M%S')
-    f1.savefig(nowDatetime + '_' + args.save + '.png', dpi=100)
+    imgResultFileName = os.path.join(os.getcwd(), 'result', nowDatetime + '_' + args.save + '.png')
+    f1.savefig(imgResultFileName, dpi=100)
+    print '**** Result Image Saved at [{}] ...'.format(imgResultFileName)
 
 
 if __name__ == "__main__":
