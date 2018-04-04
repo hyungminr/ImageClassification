@@ -39,6 +39,8 @@ def parse_args():
                         default='example_annotation')
     parser.add_argument('--size', dest='img_size', help='Size of Input Images (default:224 -> 224x224x3)',
                         default=224, type=int)
+    parser.add_argument('--mode', dest='mode', help='Classification or Regression mode',
+                        default='classification')
 
     args = parser.parse_args()
 
@@ -188,13 +190,13 @@ def get_model(input_shape, class_num):
     if args.model == 'resnet50':
         model = ResNet50(include_top=True, weights=None,
                          input_tensor=None, input_shape=input_shape,
-                         pooling=None, mode='classification',
+                         pooling=None, mode=args.mode,
                          classes=class_num)
         
     elif args.model == 'resnet50_imagenet':
         model = ResNet50(include_top=True, weights='imagenet',
                          input_tensor=None, input_shape=input_shape,
-                         pooling=None, mode='classification',
+                         pooling=None, mode=args.mode,
                          classes=class_num)
         
     elif args.model == 'pretrained':
