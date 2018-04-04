@@ -1,4 +1,4 @@
-# ImageClassification
+# Simple Image Classification
 
 Python2.7 - Keras (using TensorFlow backend) code for Image Classification task.
 
