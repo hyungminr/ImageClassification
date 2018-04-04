@@ -10,11 +10,11 @@ When training on your custom data, you should construct your data format - you m
 (1) with annotation file (see data/example_annotation)
 
 [data]
-	|	[Your_Custom_Data]
-  |	|	annotation.txt
-	|	|	[Images]
-  | | | a.jpg
-  | | | b.jpg
+  |  [Your_Custom_Data]
+  |  |  annotation.txt
+  |  |  [Images]
+  |  |  |  a.jpg
+  |  |  |  b.jpg
   
 where annotation.txt's format should follow:
 Images/a.jpg  (tab) label_a
@@ -23,13 +23,13 @@ Images/b.jpg  (tab) label_b
 (2) with no annotation file (see data/example_categorical_folders)
 
 [data]
-  | [Your_Custom_Data]
-  | | [label_a]
-  | | | a1.jpg
-  | | | a2.jpg
-  | | [label_b]
-  | | | b1.jpg
-  | | | b2.jpg
+  |  [Your_Custom_Data]
+  |  |  [label_a]
+  |  |  |  a1.jpg
+  |  |  |  a2.jpg
+  |  |  [label_b]
+  |  |  |  b1.jpg
+  |  |  |  b2.jpg
   
 If your class number is different from that of ImageNet (i.e., your_class_num is not 1,000), the last Dense layer will automatically be replaced.
 
