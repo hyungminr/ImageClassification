@@ -8,6 +8,8 @@ https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50
 
 ## Training on Custom Data
 
+<br />
+
 1. Data Structure<br /><br />
 When training on your custom data, you should construct your data format - you might want to choose one of two options.
 
@@ -38,7 +40,9 @@ Images/b.jpg  (tab) label_b
 ......... b1.jpg
 ......... b2.jpg
 ```
+
 <br />
+
 2. Class Number<br /><br />
 If your class number is different from that of ImageNet (i.e., your_class_num is not 1,000), the last Dense layer will automatically be replaced.
 
