@@ -30,6 +30,13 @@ Images/b.jpg  (tab) label_b
 -|--|-[label_b]<br />
 -|--|--|-b1.jpg<br />
 -|--|--|-b2.jpg<br />
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
   
 If your class number is different from that of ImageNet (i.e., your_class_num is not 1,000), the last Dense layer will automatically be replaced.
 
