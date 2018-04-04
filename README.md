@@ -1,7 +1,7 @@
 # Simple Image Classification
 
-Python2.7 - Keras (using TensorFlow backend) code for Image Classification task.
-By default, this code uses ResNet50 trained on ImageNet as a pretrained model from the link below:
+Python2.7 - Keras (using TensorFlow backend) code for Image Classification task.<br />
+By default, this code uses ResNet50 trained on ImageNet as a pretrained model from the link below:<br />
 https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels.h5
 
 
