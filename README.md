@@ -14,11 +14,11 @@ When training on your custom data, you should construct your data format - you m
 
 ```
 data/
-├── Your_Custom_Data/
-├── ├── annotation.txt
-├── ├── Images/
-├── ├── ├── a.jpg
-└── └── └── b.jpg
+└── Your_Custom_Data/
+    ├── annotation.txt
+    └── Images/
+        ├── a.jpg
+        └── b.jpg
 ```
 
 where *annotation.txt*'s format should follow:<br />
@@ -31,14 +31,14 @@ Images/b.jpg (tab) label_b
 #### (2) with no annotation file (*see data/example_categorical_folders*)
 
 ```
-[data]
-... [Your_Custom_Data]
-...... [label_a]
-......... a1.jpg
-......... a2.jpg
-...... [label_b]
-......... b1.jpg
-......... b2.jpg
+data/
+└── Your_Custom_Data/
+    ├── label_a/
+    │   ├── a1.jpg
+    │   └── a2.jpg
+    └── label_b/
+        ├── b1.jpg
+        └── b2.jpg
 ```
 
 ### 2. The Number of Classes
