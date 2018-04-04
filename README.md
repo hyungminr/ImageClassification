@@ -7,10 +7,10 @@ https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50
 
 ## Training on Custom Data
 
-#### 1. Data Structure
+### 1. Data Structure
 When training on your custom data, you should construct your data format - you might want to choose one of two options.
 
-##### (1) with annotation file (*see data/example_annotation*)
+#### (1) with annotation file (*see data/example_annotation*)
 
 ```
 [data]
@@ -28,7 +28,7 @@ Images/b.jpg (tab) label_b
 ```
 
 
-##### (2) with no annotation file (*see data/example_categorical_folders*)
+#### (2) with no annotation file (*see data/example_categorical_folders*)
 
 ```
 [data]
@@ -41,10 +41,10 @@ Images/b.jpg (tab) label_b
 ......... b2.jpg
 ```
 
-#### 2. The Number of Classes
+### 2. The Number of Classes
 If your class number is different from that of ImageNet (i.e., your_class_num is not 1,000), the last Dense layer will automatically be replaced.
 
 
-#### 3. Classification || Regression Mode
-By default, the code will train a classification model.
+### 3. Classification || Regression Mode
+By default, the code will train a classification model.<br />
 You can train a regression model by adding *"--mode regression"* in *run_train.sh*
