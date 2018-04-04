@@ -9,10 +9,10 @@ When training on your custom data, you should construct your data format - you m
 
 (1) with annotation file (see data/example_annotation)
 
-'<data>'
-  | '<Your_Custom_Data>'
-  | | annotation.txt
-  | | '<Images>'
+[data]
+	|	[Your_Custom_Data]
+  |	|	annotation.txt
+	|	|	[Images]
   | | | a.jpg
   | | | b.jpg
   
@@ -22,12 +22,12 @@ Images/b.jpg  (tab) label_b
 
 (2) with no annotation file (see data/example_categorical_folders)
 
-'<data>'
-  | '<Your_Custom_Data>'
-  | | '<label_a>'
+[data]
+  | [Your_Custom_Data]
+  | | [label_a]
   | | | a1.jpg
   | | | a2.jpg
-  | | '<label_b>'
+  | | [label_b]
   | | | b1.jpg
   | | | b2.jpg
   
