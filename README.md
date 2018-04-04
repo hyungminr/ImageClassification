@@ -7,7 +7,6 @@ https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50
 
 
 ## Training on Custom Data
-
 <br />
 
 1. Data Structure<br /><br />
@@ -24,8 +23,8 @@ When training on your custom data, you should construct your data format - you m
 ......... b.jpg
 ```
 
-where annotation.txt's format should follow:
-Images/a.jpg  (tab) label_a
+where annotation.txt's format should follow:<br />
+Images/a.jpg  (tab) label_a<br />
 Images/b.jpg  (tab) label_b
 
 (2) with no annotation file (see data/example_categorical_folders)
