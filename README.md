@@ -3,16 +3,16 @@
 Python2.7 - Keras (using TensorFlow backend) code for Image Classification task.
 
 By default, this code uses ResNet50 trained on ImageNet as a pretrained model from the link below
-(https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels.h5)
+https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels.h5
 
 When training on your custom data, you should construct your data format - you might want to choose one of two options.
 
 (1) with annotation file (see data/example_annotation)
 
-<data>
-  | <Your_Custom_Data>
+'<data>'
+  | '<Your_Custom_Data>'
   | | annotation.txt
-  | | <Images>
+  | | '<Images>'
   | | | a.jpg
   | | | b.jpg
   
@@ -22,12 +22,12 @@ Images/b.jpg  (tab) label_b
 
 (2) with no annotation file (see data/example_categorical_folders)
 
-<data>
-  | <Your_Custom_Data>
-  | | <label_a>
+'<data>'
+  | '<Your_Custom_Data>'
+  | | '<label_a>'
   | | | a1.jpg
   | | | a2.jpg
-  | | <label_b>
+  | | '<label_b>'
   | | | b1.jpg
   | | | b2.jpg
   
