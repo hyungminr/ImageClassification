@@ -2,3 +2,5 @@
 *.h5
 # no .pyc files
 *.pyc
+# no .bak files
+*.bak
